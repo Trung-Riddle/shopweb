@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <title>Admin</title>
+</head>
+
+<body>
+    <%- include('../partials/navbar.ejs') %>
+        <section id="content">
+            <%- include('../partials/header.ejs') %>
+                <main>
+                    <div class="head-title">
+                        <div class="left">
+                            <h1>Add Product</h1>
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="#">Dashboard</a>
+                                </li>
+                                <li><i class='bx bx-chevron-right'></i></li>
+                                <li>
+                                    <a class="active" href="/admin/home">Home</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="/admin/store" class="btn-download">
+                            <i class='bx bx-arrow-back'></i>
+                            <span class="text">back to Store</span>
+                        </a>
+                    </div>
+                    <div class="form__add-product">
+                        <form enctype="multipart/form-data" id="add" name="add" action="/admin/store/add/handle" method="post">
+                            <h2>Thêm mới sản phẩm</h2>
+                            <div class="flex__form-row-1-3">
+                                <div class="form-group-ct">
+                                    <label for="category">category *</label>
+                                    <select class="form-control" name="category" id="category">
+                                        <option value="">-- Choose category --</option>
+                                        <option value="">bedroom</option>
+                                        <option value="">office</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-ct">
+                                    <label for="namepd">name *</label>
+                                    <input class="form-control" name="namepd" placeholder="Enter name product.."
+                                        type="text" id="namepd">
+                                </div>
+                                <div class="form-group-ct">
+                                    <label for="brand">Brand *</label>
+                                    <input class="form-control" name="brand" placeholder="Enter name brand.."
+                                        type="text" id="brand">
+                                </div>
+                            </div>
+                            <div class="flex__form-row-1-3">
+                                <div class="form-group-2-ct">
+                                    <div class="form-group-ct">
+                                        <label for="price">Price *</label>
+                                        <input type="text" class="form-control" name="price" id="price"
+                                            placeholder="Enter price product...">
+                                    </div>
+                                    <div class="form-group-ct">
+                                        <label for="priced">Price has dropped *</label>
+                                        <input type="text" class="form-control" name="priced" id="priced"
+                                            placeholder="Enter price has dropped...">
+                                    </div>
+                                </div>
+                                <div class="form-group-2-ct">
+                                    <div class="form-group-ct">
+                                        <label for="material">material *</label>
+                                        <input type="text" class="form-control" name="material" id="material"
+                                            placeholder="Enter material...">
+                                    </div>
+                                    <div class="form-group-ct">
+                                        <label for="Weight">Weight *</label>
+                                        <input type="text" class="form-control" name="Weight" id="Weight"
+                                            placeholder="Enter Weight...">
+                                    </div>
+                                </div>
+                                <div class="form-group-ct">
+                                    <label for="desc">description *</label>
+                                    <textarea class="form-control" name="desc" id="desc"
+                                        placeholder="Enter description product..."></textarea>
+                                </div>
+                            </div>
+                            <div class="flex__form-upload">
+                                <div class="form-image-preview">
+                                    <img id="photo-preview" src="../../images/icons/plus.png" alt="hehe">
+                                    <label for="main-image">
+                                        <img id="icon-click" src="../../images/icons/photo.png" alt="">
+                                    </label>
+                                    <input id="main-image" name="image" type="file">
+                                    <p>upload main image</p>
+                                </div>
+                                <div class="form-multiple-images-review">
+                                    <div class="tophead">
+                                        <p>Drag & drop image upload</p> 
+                                    </div>
+                                    <div class="form_drag_drop" class="dragover">
+                                        <span class="inner">Drag & drop image here or <span class="select">Browse</span> </span>
+                                        <input type="file" name="multiple_images" id="multiple_images" multiple>
+                                    </div>
+                                    <div class="container__preview">
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <button class="btn-form-submit" type="submit">Hoàn Tất</button>
+                        </form>
+                    </div>
+                </main>
+        </section>
+        <script src="/js/index.js"></script>
+        <script>
+            const mainImage = document.getElementById('main-image');
+            const photoPreview = document.getElementById('photo-preview');
+            const iconClick = document.getElementById('icon-click');
+            const btnSubmit = document.querySelector('.btn-form-submit')
+            let filesImage = [];
+            const formPost = document.getElementById('add')
+            const formDragDrop = document.querySelector('.form_drag_drop')
+            const containerPreview = document.querySelector('.container__preview')
+            const innerChange = document.querySelector('.inner')
+            const browse = document.querySelector('.select')
+            const inputFiles = document.querySelector('#multiple_images')
+
+            browse.addEventListener('click', () => inputFiles.click())
+            
+            inputFiles.addEventListener('change', () => {
+                let file = inputFiles.files;
+                let fileLength = file.length
+                for (let i = 0; i < fileLength; i++) {
+                    if (filesImage.every(e => e.name != file[i].name) ){
+                        filesImage.push(file[i])
+                    }
+                    
+                }
+                // formPost.reset()
+                showImages()
+            })
+            const showImages = () => {
+                let images = ''
+                filesImage.forEach((e, i) =>{
+                    images += `
+                        <div class="image-item">
+                            <img src="${URL.createObjectURL(e)}" alt="image">
+                            <span onclick="delImage(${i})">&times;</span>
+                        </div>
+                    `;
+
+                })
+                containerPreview.innerHTML = images;
+            }
+            const delImage = index => {
+                filesImage.splice(index, 1);
+                showImages()
+            }
+            formDragDrop.addEventListener('dragover', e => {
+                e.preventDefault();
+                formDragDrop.classList.add('dragover')
+                innerChange.innerHTML = 'Drop image here'
+            })
+            formDragDrop.addEventListener('dragleave', e => {
+                e.preventDefault();
+                formDragDrop.classList.remove('dragover')
+                innerChange.innerHTML = '<span class="inner">Drag & drop image here or <span class="select">Browse</span> </span>'
+            })
+            formDragDrop.addEventListener('drop', e => {
+                e.preventDefault();
+                let file = e.dataTransfer.files
+                let fileLength = file.length
+                for (let i = 0; i < fileLength; i++) {
+                    if (filesImage.every(e => e.name != file[i].name) ){
+                        filesImage.push(file[i])
+                    }
+                    
+                }
+                // formPost.reset()
+                showImages()
+            })
+
+
+
+
+            mainImage.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    let src = URL.createObjectURL(e.target.files[0]);
+                    photoPreview.src = src;
+                    iconClick.style.opacity = '0.4';
+                }
+            });
+        </script>
+</body>
+
+</html>

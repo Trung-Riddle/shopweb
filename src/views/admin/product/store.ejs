@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="/css/admin.css">
+
+	<title>Admin</title>
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %> 
+    <section id="content">
+        <%- include('../partials/header.ejs') %> 
+        <main>
+            <div class="head-title">
+				<div class="left">
+					<h1>my store</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="/admin/home">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="/admin/store/add" class="btn-download">
+					<i class='bx bx-plus-circle'></i>
+					<span class="text">Add Product</span>
+				</a>
+			</div>
+			<div class="dialog-blur" onclick="rmDialogClick()">
+				<div class="dialog-rm">
+					<i class='bx bx-message-alt-x'></i>
+					<p>Bạn có chắc là muốn xoá sản phẩm này?</p>
+					<form id="rm" method="post" action="" class="flex-ct">
+						<button onclick="rmDialogClick()" class="rm-btn" type="button">cancel</button>
+						<button type="submit" form="rm">Xoá Luông</button>
+					</form>
+				</div>
+			</div>
+			<div class="table-bordered">
+				<table class="table-list">
+					<thead>
+						<tr>
+							<th class="index">#</th>
+							<th class="name-td">name</th>
+							<th>image</th>
+							<th>category</th>
+							<th>price</th>
+							<th>QTY</th>
+							<th>control</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="index">1</td>
+							<td class="name-td"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p></td>
+							<td class="td-img">
+								<img src="https://i.pinimg.com/564x/a6/66/64/a666642724be2af101458c874131748f.jpg" alt="">
+							</td>
+							<td>office</td>
+							<td>$1200.00</td>
+							<td>12</td>
+							<td>
+								<span class="flex_left text-a">
+									<a href="/admin/store/edit"><i class='bx bx-edit edit-icon icon'></i></a>
+									<i class='bx bx-box rm-icon icon'></i>
+									<a href="#"><i class='bx bx-info-circle info-icon icon'></i></a>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+        </main>
+    </section>
+	<script src="/js/index.js"></script>
+	<script>
+		const createDialog = document.querySelectorAll('.rm-icon');
+		const rmBtn = document.querySelector('.rm-icon');
+		const dialogBlur = document.querySelector('.dialog-blur');
+
+		createDialog.forEach((element) => {
+			element.onclick = () => {
+				dialogBlur.style.display = 'block';
+			}
+		})
+		function rmDialogClick() {
+			dialogBlur.style.display = 'none';
+		}
+	</script>
+</body>
+</html>
